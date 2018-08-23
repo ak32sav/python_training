@@ -1,8 +1,6 @@
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-
-
 class Application:
 
     def __init__(self):
@@ -12,6 +10,51 @@ class Application:
     def logout(self):
         wd = self.wd
         wd.find_element_by_link_text("Logout").click()
+
+    def login(self, username, password):
+        wd = self.wd
+        self.open_homepage()
+        wd.find_element_by_name("user").click()
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(username)
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+
+    def open_homepage(self):
+        wd = self.wd
+        wd.get("http://localhost/addressbook/index.php")
+
+    def destroy(self):
+        self.wd.quit()
+
+# CONTACT
+    def create_contact(self, contact):
+        wd = self.wd
+        # open contact creation page
+        wd.find_element_by_link_text("add new").click()
+        # fill the form
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys(contact.fname)
+        wd.find_element_by_name("lastname").click()
+        wd.find_element_by_name("lastname").clear()
+        wd.find_element_by_name("lastname").send_keys(contact.lname)
+        wd.find_element_by_name("nickname").click()
+        wd.find_element_by_name("nickname").clear()
+        wd.find_element_by_name("nickname").send_keys(contact.nickname)
+        wd.find_element_by_name("email").click()
+        wd.find_element_by_name("email").clear()
+        wd.find_element_by_name("email").send_keys(contact.email)
+        wd.find_element_by_name("home").click()
+        wd.find_element_by_name("home").clear()
+        wd.find_element_by_name("home").send_keys(contact.home_phone)
+        # submit
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.open_homepage()
+
+# GROUPS
 
     def return_to_groups_page(self):
         wd = self.wd
@@ -39,21 +82,3 @@ class Application:
     def open_groups_page(self):
         wd = self.wd
         wd.find_element_by_link_text("groups").click()
-
-    def login(self, username, password):
-        wd = self.wd
-        self.open_homepage()
-        wd.find_element_by_name("user").click()
-        wd.find_element_by_name("user").clear()
-        wd.find_element_by_name("user").send_keys(username)
-        wd.find_element_by_name("pass").click()
-        wd.find_element_by_name("pass").clear()
-        wd.find_element_by_name("pass").send_keys(password)
-        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
-
-    def open_homepage(self):
-        wd = self.wd
-        wd.get("http://localhost/addressbook/index.php")
-
-    def destroy(self):
-        self.wd.quit()
