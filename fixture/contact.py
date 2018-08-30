@@ -58,3 +58,8 @@ class ContactHelper:
         # accept deleting
         wd.switch_to_alert().accept()
         self.app.open_homepage()
+
+    def count(self):
+        wd = self.app.wd
+        self.app.open_homepage()
+        return len(wd.find_elements_by_name("selected[]"))
