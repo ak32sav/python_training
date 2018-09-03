@@ -22,7 +22,7 @@ class Application:
 
     def open_homepage(self):
         wd = self.wd
-        if not (wd.current_url == "http://localhost/addressbook/index.php" and len(wd.find_elements_by_name("new")) > 0):
+        if not (wd.current_url == "http://localhost/addressbook/index.php" and len(wd.find_elements_by_name("searchform")) > 0):
             wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):
