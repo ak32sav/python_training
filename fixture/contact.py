@@ -74,10 +74,12 @@ class ContactHelper:
             for element in wd.find_elements_by_xpath("//tr[@name='entry']"):
                 fname = element.find_element_by_xpath(".//td[3]").text
                 lname = element.find_element_by_xpath(".//td[2]").text
-                id=element.find_element_by_xpath(".//input").get_attribute("value")
+                id = element.find_element_by_xpath(".//input").get_attribute("value")
                 all_phones = element.find_element_by_xpath(".//td[6]").text
+                emails = element.find_element_by_xpath(".//td[5]").text
+                address = element.find_element_by_xpath(".//td[4]").text
                 self.contact_cache.append(Contact(fname=fname, lname=lname, id=id,
-                                                  all_phones_from_homepage=all_phones
+                                                  all_phones=all_phones, emails=emails, address=address
                                                   ))
         return list(self.contact_cache)
 
@@ -102,8 +104,14 @@ class ContactHelper:
         fname = wd.find_element_by_name("firstname").get_attribute("value")
         lname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
+        address = wd.find_element_by_name("address").text
         return Contact(fname=fname, lname=lname, id=id,
-                       home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, secondary_phone=secondary_phone
+                       home_phone=home_phone, mobile_phone=mobile_phone, work_phone=work_phone, secondary_phone=secondary_phone,
+                       email=email, email2=email2, email3=email3,
+                       address=address
                        )
 
     def get_contact_info_from_view_page(self, index):
