@@ -75,16 +75,9 @@ class ContactHelper:
                 fname = element.find_element_by_xpath(".//td[3]").text
                 lname = element.find_element_by_xpath(".//td[2]").text
                 id=element.find_element_by_xpath(".//input").get_attribute("value")
-                all_phones_from_page = element.find_element_by_xpath(".//td[6]").text.splitlines()
-                all_phones = []
-                for i in range(0,4):
-                    if i+1<=len(all_phones_from_page):
-                        all_phones.append(all_phones_from_page[i])
-                    else:
-                        all_phones.append("")
+                all_phones = element.find_element_by_xpath(".//td[6]").text
                 self.contact_cache.append(Contact(fname=fname, lname=lname, id=id,
-                                                  home_phone=all_phones[0], mobile_phone=all_phones[1],
-                                                  work_phone=all_phones[2], secondary_phone=all_phones[3]
+                                                  all_phones_from_homepage=all_phones
                                                   ))
         return list(self.contact_cache)
 
