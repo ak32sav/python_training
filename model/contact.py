@@ -23,10 +23,10 @@ class Contact:
 
     def __repr__(self):
         #return "%s:%s:%s:%s:%s:%s:%s:%s" % (self.id, self.fname, self.lname, self.home_phone, self.work_phone, self.mobile_phone, self.secondary_phone, self.all_phones)
-        return "\n========================\nID: %s\nFirst name: %s\nLast name: %s" \
-               "\nHome phone: %s\nWork phone: %s\nMobile phone: %s\nSecondary phone: %s\nAll phones: \n%s" \
-               "\nEmail: %s\nEmail2: %s\nEmail3: %s\nAll emails:\n%s" \
-               "\nAddress:\n%s" \
+        return "ID: %s;First name: %s;Last name: %s" \
+               ";Home phone: %s;Work phone: %s;Mobile phone: %s;Secondary phone: %s;All phones: %s" \
+               ";Email: %s;Email2: %s;Email3: %s;All emails: %s" \
+               ";Address: %s" \
                % (self.id, self.fname, self.lname,
                   self.home_phone, self.work_phone, self.mobile_phone, self.secondary_phone, self.all_phones,
                   self.email, self.email2, self.email3, self.emails,
