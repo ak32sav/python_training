@@ -1,5 +1,5 @@
 import pymysql.cursors
-from module.group import Group
+from model.group import Group
 
 class DbFixture:
 
