@@ -30,6 +30,17 @@ class ContactHelper:
         self.app.open_homepage()
         self.contact_cache = None
 
+    def edit_contact_by_id(self, contact, id):
+        wd = self.app.wd
+        self.app.open_homepage()
+        # select first contact and click on Edit
+        wd.find_element_by_xpath("//a[contains(@href,'%s')]/img[@title='Edit']" % id).click()
+        self.fill_contact_form(contact)
+        # submit
+        wd.find_element_by_xpath("//input[@name='update' and @value='Update']").click()
+        self.app.open_homepage()
+        self.contact_cache = None
+
     def fill_contact_form(self, contact):
         wd = self.app.wd
         self.change_field_value("firstname", contact.fname)
