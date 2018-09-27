@@ -59,6 +59,21 @@ class ContactHelper:
         self.app.open_homepage()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_homepage()
+        # select and click on Delete button
+        self.select_contact_by_id(id)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # accept deleting
+        wd.switch_to_alert().accept()
+        self.app.open_homepage()
+        self.contact_cache = None
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@name='selected[]' and @id='%s']" % id).click()
+
     def count(self):
         wd = self.app.wd
         self.app.open_homepage()
@@ -81,6 +96,18 @@ class ContactHelper:
                 self.contact_cache.append(Contact(fname=fname, lname=lname, id=id,
                                                   all_phones=all_phones, emails=emails, address=address
                                                   ))
+        return list(self.contact_cache)
+
+    def get_contacts_list_lite(self):
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.open_homepage()
+            self.contact_cache = []
+            for element in wd.find_elements_by_xpath("//tr[@name='entry']"):
+                fname = element.find_element_by_xpath(".//td[3]").text
+                lname = element.find_element_by_xpath(".//td[2]").text
+                id = element.find_element_by_xpath(".//input").get_attribute("value")
+                self.contact_cache.append(Contact(fname=fname, lname=lname, id=id))
         return list(self.contact_cache)
 
     def open_edit_contact_form_by_index(self, index):
