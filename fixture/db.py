@@ -34,7 +34,7 @@ class DbFixture:
                 list.append(Contact(id=str(id), fname=firstname.strip(), lname=lastname.strip(),
                                     email=email.strip(), email2=email2.strip(), email3=email3.strip(),
                                     home_phone=home.strip(), mobile_phone=mobile.strip(), work_phone=work.strip(), secondary_phone=phone2.strip(),
-                                    address=address.strip()))
+                                    address=address.strip().replace("\r\n", "\n")))
         finally:
             cursor.close()
             return list
